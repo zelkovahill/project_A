@@ -1,68 +1,71 @@
 using UnityEngine;
 
-public class CommandInput : MonoBehaviour
+namespace Command
 {
-    public Vector2 moveInput;
-
-    public KeyCode forwardKey = KeyCode.W;
-    public KeyCode backwardKey = KeyCode.S;
-    public KeyCode leftKey = KeyCode.A;
-    public KeyCode rightKey = KeyCode.D;
-
-    public KeyCode undoKey = KeyCode.Z;
-    public KeyCode redoKey = KeyCode.X;
-
-    private Actor _actor;
-
-    private void Awake()
+    public class CommandInput : MonoBehaviour
     {
-        _actor = GetComponent<Actor>();
-    }
+        public Vector2 moveInput;
 
-    private void Update()
-    {
-        MoveInput();
-        HandleUndoRedo();
-    }
+        public KeyCode forwardKey = KeyCode.W;
+        public KeyCode backwardKey = KeyCode.S;
+        public KeyCode leftKey = KeyCode.A;
+        public KeyCode rightKey = KeyCode.D;
 
-    private void MoveInput()
-    {
-        moveInput = Vector2.zero;
+        public KeyCode undoKey = KeyCode.Z;
+        public KeyCode redoKey = KeyCode.X;
 
-        if (Input.GetKeyDown(forwardKey))
+        private Actor _actor;
+
+        private void Awake()
         {
-            moveInput.y = 1;
-        }
-        else if (Input.GetKeyDown(backwardKey))
-        {
-            moveInput.y = -1;
+            _actor = GetComponent<Actor>();
         }
 
-        if (Input.GetKeyDown(leftKey))
+        private void Update()
         {
-            moveInput.x = -1;
-        }
-        else if (Input.GetKeyDown(rightKey))
-        {
-            moveInput.x = 1;
+            MoveInput();
+            HandleUndoRedo();
         }
 
-        if (moveInput != Vector2.zero)
+        private void MoveInput()
         {
-            CommandInvoker.ExecuteCommand(new MoveCommand(_actor, moveInput));
-        }
-    }
+            moveInput = Vector2.zero;
 
-    private void HandleUndoRedo()
-    {
-        if (Input.GetKeyDown(undoKey))
-        {
-            CommandInvoker.UndoCommand();
+            if (Input.GetKeyDown(forwardKey))
+            {
+                moveInput.y = 1;
+            }
+            else if (Input.GetKeyDown(backwardKey))
+            {
+                moveInput.y = -1;
+            }
+
+            if (Input.GetKeyDown(leftKey))
+            {
+                moveInput.x = -1;
+            }
+            else if (Input.GetKeyDown(rightKey))
+            {
+                moveInput.x = 1;
+            }
+
+            if (moveInput != Vector2.zero)
+            {
+                CommandInvoker.ExecuteCommand(new MoveCommand(_actor, moveInput));
+            }
         }
 
-        if (Input.GetKeyDown(redoKey))
+        private void HandleUndoRedo()
         {
-            CommandInvoker.RedoCommand();
+            if (Input.GetKeyDown(undoKey))
+            {
+                CommandInvoker.UndoCommand();
+            }
+
+            if (Input.GetKeyDown(redoKey))
+            {
+                CommandInvoker.RedoCommand();
+            }
         }
     }
 }

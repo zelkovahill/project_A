@@ -1,35 +1,38 @@
 using System.Collections.Generic;
 
-public class CommandInvoker
+namespace Command
 {
-    private static Stack<Command> s_UndoStack = new Stack<Command>();
-    private static Stack<Command> s_RedoStack = new Stack<Command>();
-
-    public static void ExecuteCommand(Command command)
+    public class CommandInvoker
     {
-        command.Execute();
-        s_UndoStack.Push(command);
+        private static Stack<Command> s_UndoStack = new Stack<Command>();
+        private static Stack<Command> s_RedoStack = new Stack<Command>();
 
-        s_RedoStack.Clear();
-    }
-
-    public static void UndoCommand()
-    {
-        if (s_UndoStack.Count > 0)
+        public static void ExecuteCommand(Command command)
         {
-            Command activeCommand = s_UndoStack.Pop();
-            s_RedoStack.Push(activeCommand);
-            activeCommand.Undo();
+            command.Execute();
+            s_UndoStack.Push(command);
+
+            s_RedoStack.Clear();
         }
-    }
 
-    public static void RedoCommand()
-    {
-        if (s_RedoStack.Count > 0)
+        public static void UndoCommand()
         {
-            Command activeCommand = s_RedoStack.Pop();
-            s_UndoStack.Push(activeCommand);
-            activeCommand.Execute();
+            if (s_UndoStack.Count > 0)
+            {
+                Command activeCommand = s_UndoStack.Pop();
+                s_RedoStack.Push(activeCommand);
+                activeCommand.Undo();
+            }
+        }
+
+        public static void RedoCommand()
+        {
+            if (s_RedoStack.Count > 0)
+            {
+                Command activeCommand = s_RedoStack.Pop();
+                s_UndoStack.Push(activeCommand);
+                activeCommand.Execute();
+            }
         }
     }
 }

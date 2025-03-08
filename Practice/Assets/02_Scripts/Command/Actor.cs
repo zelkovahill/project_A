@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class Actor : MonoBehaviour
+namespace Command
 {
-    public float moveSpeed = 1f;
-
-    public void Move(Vector3 moveDirection)
+    public class Actor : MonoBehaviour
     {
-        transform.position += moveDirection * moveSpeed;
+        public float moveSpeed = 1f;
+
+        public void Move(Vector3 moveDirection)
+        {
+            transform.position += moveDirection * moveSpeed;
+        }
     }
 }

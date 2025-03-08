@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Observer
+namespace Observer.Interface
 {
-    public class HealthUI : MonoBehaviour
+    public class HealthUI : MonoBehaviour, IHealthObserver
     {
         [SerializeField] private Text healthText;
         private Player _player;
@@ -11,17 +11,17 @@ namespace Observer
         private void Awake()
         {
             _player = GetComponent<Player>();
-            _player.OnHealthChanged += UpdateHealthUI;
+            _player.RegisterObserver(this);
         }
 
-        private void UpdateHealthUI(int newHealth)
+        public void OnHealthChanged(int newHealth)
         {
             healthText.text = newHealth.ToString();
         }
 
-        private void OnDestory()
+        private void OnDestroy()
         {
-            _player.OnHealthChanged -= UpdateHealthUI;
+            _player.UnregisterObserver(this);
         }
     }
 }

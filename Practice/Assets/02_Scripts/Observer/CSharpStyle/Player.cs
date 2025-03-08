@@ -1,12 +1,14 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
-namespace Observer
+namespace Observer.CSharpStyle
 {
     public class Player : MonoBehaviour
     {
         public event Action<int> OnHealthChanged;
+        // public UnityEvent<int> OnHealthChanged;
 
         private int _health = 100;
 

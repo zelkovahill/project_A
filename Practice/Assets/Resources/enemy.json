@@ -1,0 +1,13 @@
+{
+    "name": "고블린 보병",
+    "bagicHealth": 100,
+    "maxHealth": 100,
+    "tolerance": [
+        "추위",
+        "독"
+    ],
+    "weakness": [
+        "불",
+        "빛"
+    ]
+}

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Observer.CSharpStyle
+namespace Design.Observer.CSharpStyle
 {
     public class GameManager : MonoBehaviour
     {

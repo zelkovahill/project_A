@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Command
+namespace Design.Command
 {
     public class CommandInput : MonoBehaviour
     {

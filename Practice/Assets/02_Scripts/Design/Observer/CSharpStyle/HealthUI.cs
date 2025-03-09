@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Observer.CSharpStyle
+namespace Design.Observer.CSharpStyle
 {
     public class HealthUI : MonoBehaviour
     {

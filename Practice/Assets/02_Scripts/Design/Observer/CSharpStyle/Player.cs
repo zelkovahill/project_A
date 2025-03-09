@@ -1,9 +1,8 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Observer.CSharpStyle
+namespace Design.Observer.CSharpStyle
 {
     public class Player : MonoBehaviour
     {
